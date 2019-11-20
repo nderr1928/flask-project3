@@ -8,11 +8,11 @@ companion = Blueprint('companions', 'companion')
 
 #List all party
 @companion.route('/', methods=['GET'])
-def list_party();
+def list_party():
 	print(current_user)
 	try:
-		party = [models_to_dict(d) for d in models.Companion.select()]
-		return jsonify(data=party, status{'code': 200, 'message': 'Success'})
+		party = [model_to_dict(d) for d in models.Companion.select()]
+		return jsonify(data=party, status={'code': 200, 'message': 'Success'})
 	except models.DoesNotExist:
 		return jsonify(data={}, status={'code': 401, 'message': 'Error getting the resources'})
 
@@ -26,11 +26,11 @@ def get_companion(companion_id):
 
 #Adding a companion to party
 @companion.route('/', methods=['POST'])
-def create_companion()
+def create_companion():
 	payload = request.get_json()
-    created_companion = models.Companion.create(**payload)
-    created_companion_dict = model_to_dict(created_companion)
-    return jsonify(data=created_companion_dict, status={'code': 201, 'message': 'success'})
+	created_companion = models.Companion.create(**payload)
+	created_companion_dict = model_to_dict(created_companion)
+	return jsonify(data=created_companion_dict, status={'code': 201, 'message': 'success'})
 
 #Delete companion
 @companion.route('/', methods=['DELETE'])
