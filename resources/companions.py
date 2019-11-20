@@ -40,6 +40,19 @@ def delete_companion(id):
 	return jsonify(data='resource successfully deleted', status={"code": 200, "message": "resource deleted successfully"})
 
 #Edit Route
+@companion.route('/<companion_id>/', methods=['PUT'])
+def update_companion(companion_id):
+    edit_companion = request.get_json()
+
+    updated_companion = models.Companion.update(
+        name=new_companion_data['name']
+    ).where(models.Companion.id==companion_id).execute()
+    update_companion_dict = model_to_dict(models.Companion.get(id=companion_id))
+    return jsonify(data=update_companion_dict, status={'code': 200, 'message': 'success'})
+
+
+
+
 
 
 

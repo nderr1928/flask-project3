@@ -19,7 +19,7 @@ class User(UserMixin, Model):
         database = DATABASE
 
 class Profile(Model):
- 	user_id = ForeignKeyField(User, backref='profiles')
+ 	user_id = ForeignKeyField(User, primary_key=True)
  	main_character = ForeignKeyField(Companion, backref='profiles') 
  	party = ForeignKeyField(Companion, backref='profiles')  
  	gold = IntegerField(default=0)
