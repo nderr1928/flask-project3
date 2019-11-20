@@ -51,3 +51,10 @@ def login():
     
     except models.DoesNotExist:
         return jsonify(data={}, status={'code': 401, 'message': "Email or password is incorrect"})
+
+
+#Show individual user
+@user.route('/<user_id>/', methods=['GET'])
+def current_user(user_id):
+    user = model_to_dict(models.User.get(id=user_id))
+    return jsonify(user)

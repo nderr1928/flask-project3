@@ -5,7 +5,6 @@ from flask_cors import CORS
 from playhouse.shortcuts import model_to_dict
 from resources.companions import companion
 from resources.locations import location
-from resources.profiles import profile
 from resources.users import user
 
 DEBUG=True
