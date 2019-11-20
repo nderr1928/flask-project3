@@ -24,7 +24,7 @@ def get_profile(profile_id):
 	return jsonify(profile)
 
 
-#Adding a profile to party
+#Creation of profile
 @profile.route('/', methods=['POST'])
 def create_profile():
 	payload = request.get_json()
@@ -32,7 +32,7 @@ def create_profile():
 	created_profile_dict = model_to_dict(created_profile)
 	return jsonify(data=created_profile_dict, status={'code': 201, 'message': 'success'})
 
-#Delete companion
+#Delete profile
 @profile.route('/', methods=['DELETE'])
 def delete_profile(id):
 	deleted_profile = models.Profile.get(id=id)
@@ -41,11 +41,11 @@ def delete_profile(id):
 
 #Edit Route
 @profile.route('/<profile_id>/', methods=['PUT'])
-def update_profile(companion_id):
+def update_profile(profile_id):
     edit_profile = request.get_json()
 
     updated_profile = models.Profile.update(
-        name=new_profile_data['name']
+        display_name=new_profile_data['name']
     ).where(models.Profile.id==profile_id).execute()
     update_profile_dict = model_to_dict(models.Profile.get(id=profile_id))
     return jsonify(data=update_profile_dict, status={'code': 200, 'message': 'success'})

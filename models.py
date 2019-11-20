@@ -3,19 +3,6 @@ from flask_login import UserMixin
 
 DATABASE = SqliteDatabase('project3.sqlite')
 
-class User(UserMixin, Model):
-	email = CharField(unique=True)
-	password = CharField()
-
-	def __str__(self):
-		return '<User: {}, id: {}>'.format(self.email, self.id)
-
-	def __repr__(self):
-		return '<User: {}, id: {}>'.format(self.email, self.id)
-
-	class Meta:
-		db_table = 'users'
-		database = DATABASE
 
 class Companion(Model):
 	name = CharField()
@@ -73,9 +60,28 @@ class Monster(Model):
 		db_table = 'monsters'
 		database = DATABASE
 
+class User(UserMixin, Model):
+	email = CharField(unique=True)
+	password = CharField()
+	display_name = CharField();
+	main_character = ForeignKeyField(Companion, backref='profiles') 
+	party = ForeignKeyField(Companion, backref='profiles')  
+	gold = IntegerField(default=0)
+	inventory = ForeignKeyField(Item, backref='profiles') 
+
+	def __str__(self):
+		return '<User: {}, id: {}>'.format(self.email, self.id)
+
+	def __repr__(self):
+		return '<User: {}, id: {}>'.format(self.email, self.id)
+
+	class Meta:
+		db_table = 'users'
+		database = DATABASE
+
 def initialize(): 
 	DATABASE.connect()
-	DATABASE.create_tables([User, Profile, Companion, Item, Monster, Location])
+	DATABASE.create_tables([User, Profile, Companion, Item, Monster, Location], safe=True)
 
 	#Populating our tables upon initialization
 	location_pop = [
@@ -94,8 +100,6 @@ def initialize():
     {'name': 'Healing Potion', 'description': 'Heals a substantial amount of health.', 'effect': 5, 'location': 1},
     {'name': 'Super Healing Potion', 'description': 'Heals a large amount of health.', 'effect': 10, 'location': 1}]
 	Item.insert_many(item_pop).execute()
-
-
 	#End of population queries 
 
 	print("Database tables and data have been created")
