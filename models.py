@@ -37,18 +37,6 @@ class Item(Model):
 		db_table = 'items'
 		database = DATABASE
 
-class Profile(Model):
-	user_id = ForeignKeyField(User, primary_key=True)
-	display_name = CharField();
-	main_character = ForeignKeyField(Companion, backref='profiles') 
-	party = ForeignKeyField(Companion, backref='profiles')  
-	gold = IntegerField(default=0)
-	inventory = ForeignKeyField(Item, backref='profiles') 
-
-	class Meta:
-		db_table = 'profiles'
-		database = DATABASE
-
 class Monster(Model):
 	mons_type = CharField()
 	level = IntegerField(default=1)
@@ -63,7 +51,7 @@ class Monster(Model):
 class User(UserMixin, Model):
 	email = CharField(unique=True)
 	password = CharField()
-	display_name = CharField();
+	display_name = CharField()
 	main_character = ForeignKeyField(Companion, backref='profiles') 
 	party = ForeignKeyField(Companion, backref='profiles')  
 	gold = IntegerField(default=0)
