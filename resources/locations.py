@@ -20,5 +20,5 @@ def list_location():
 @location.route('/<location_id>/', methods=['GET'])
 def get_location(location_id):
 	location = model_to_dict(models.Location.get(id=location_id))
-	return jsonify(companion)
+	return jsonify(location)
 
