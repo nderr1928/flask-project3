@@ -55,20 +55,19 @@ class Companion(Model):
 		db_table = 'companions'
 		database = DATABASE
 
-# class Item(Model):
-# 	name = CharField()
-# 	description = CharField()
-# 	effect = CharField()
-# 	location = ForeignKeyField(Location, backref='items')
-# 	user = ForeignKeyField(User, backref='items')
+class Item(Model):
+	item_name = CharField()
+	description = CharField()
+	effect = CharField()
+	user = ForeignKeyField(User, backref='items')
 
-# 	class Meta:
-# 		db_table = 'items'
-# 		database = DATABASE
+	class Meta:
+		db_table = 'items'
+		database = DATABASE
 
 def initialize(): 
 	DATABASE.connect()
-	DATABASE.create_tables([User, Companion, Monster, Location], safe=True)
+	DATABASE.create_tables([User, Item, Companion, Monster, Location], safe=True)
 
 	#Populating our tables upon initialization
 

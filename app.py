@@ -6,6 +6,8 @@ from playhouse.shortcuts import model_to_dict
 from resources.companions import companion
 from resources.locations import location
 from resources.users import user
+from resources.items import item
+from resources.monsters import monster
 
 DEBUG=True
 PORT=8000
@@ -47,6 +49,12 @@ app.register_blueprint(location, url_prefix='/api/v1/locations')
 
 CORS(user, origins=['http://localhost:3000'], supports_credentials=True)
 app.register_blueprint(user, url_prefix='/api/v1/users')
+
+CORS(item, origins=['http://localhost:3000'], supports_credentials=True)
+app.register_blueprint(item, url_prefix='/api/v1/items')
+
+CORS(monster, origins=['http://localhost:3000'], supports_credentials=True)
+app.register_blueprint(monster, url_prefix='/api/v1/monsters')
 
 CORS(app, origins=['http://localhost:3000'], supports_credentials=True)
 
