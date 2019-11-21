@@ -11,7 +11,7 @@ user = Blueprint('users', 'user')
 @user.route('/register', methods=['POST'])
 def register():
     payload = request.get_json()
-
+    print(payload)
     if not payload['email'] or not payload['password']:
         return jsonify(status=400)
 
@@ -36,7 +36,8 @@ def register():
 #Login
 @user.route('/login', methods=['POST'])
 def login():
-    payload = request.get_json()        
+    payload = request.get_json()   
+    print(payload)     
 
     try:
         user = models.User.get(models.User.email ** payload['email'])
@@ -56,5 +57,6 @@ def login():
 #Show individual user
 @user.route('/<user_id>/', methods=['GET'])
 def current_user(user_id):
+    print(user_id)
     user = model_to_dict(models.User.get(id=user_id))
     return jsonify(user)
