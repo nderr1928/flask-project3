@@ -28,6 +28,8 @@ def get_companion(companion_id):
 @companion.route('/', methods=['POST'])
 def create_companion():
 	payload = request.get_json()
+	print(payload)
+	payload['user'] = current_user.id
 	created_companion = models.Companion.create(**payload)
 	created_companion_dict = model_to_dict(created_companion)
 	return jsonify(data=created_companion_dict, status={'code': 201, 'message': 'success'})

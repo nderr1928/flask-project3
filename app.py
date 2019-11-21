@@ -48,6 +48,9 @@ app.register_blueprint(location, url_prefix='/api/v1/locations')
 CORS(user, origins=['http://localhost:3000'], supports_credentials=True)
 app.register_blueprint(user, url_prefix='/api/v1/users')
 
+CORS(app, origins=['http://localhost:3000'], supports_credentials=True)
+
+
 
 
 if __name__ == "__main__": 

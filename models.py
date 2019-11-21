@@ -12,22 +12,12 @@ class Location(Model):
 		db_table = 'locations'
 		database = DATABASE
 
-class Item(Model):
-	name = CharField()
-	description = CharField()
-	effect = CharField()
-	location = ForeignKeyField(Location, backref='items')
-
-	class Meta:
-		db_table = 'items'
-		database = DATABASE
-
 class Monster(Model):
 	mons_type = CharField()
 	level = IntegerField(default=1)
 	health = IntegerField(default=1)
 	image = CharField()
-	location = ForeignKeyField(Location, backref='monster')
+	location = ForeignKeyField(Location, backref='monsters')
 
 	class Meta:
 		db_table = 'monsters'
@@ -39,7 +29,6 @@ class User(UserMixin, Model):
 	password = CharField()
 	display_name = CharField()
 	gold = IntegerField(default=0)
-	inventory = ForeignKeyField(Item, backref='users') 
 
 	def __str__(self):
 		return '<User: {}, id: {}>'.format(self.email, self.id)
@@ -66,9 +55,20 @@ class Companion(Model):
 		db_table = 'companions'
 		database = DATABASE
 
+# class Item(Model):
+# 	name = CharField()
+# 	description = CharField()
+# 	effect = CharField()
+# 	location = ForeignKeyField(Location, backref='items')
+# 	user = ForeignKeyField(User, backref='items')
+
+# 	class Meta:
+# 		db_table = 'items'
+# 		database = DATABASE
+
 def initialize(): 
 	DATABASE.connect()
-	DATABASE.create_tables([User, Companion, Item, Monster, Location], safe=True)
+	DATABASE.create_tables([User, Companion, Monster, Location], safe=True)
 
 	#Populating our tables upon initialization
 
@@ -87,13 +87,13 @@ def initialize():
 	    {'mons_type': 'Dragon', 'level': 10, 'health': 10, 'image': 'x', 'location': 2}]
 		Monster.insert_many(monster_pop).execute()
 
-	numOfRowsItems = Item.select().count()
-	if numOfRowsItems == 0:
-		item_pop = [
-		{'name': 'Minor Healing Potion', 'description': 'Heals a small amount of health.', 'effect': 1, 'location': 1},
-		{'name': 'Healing Potion', 'description': 'Heals a substantial amount of health.', 'effect': 5, 'location': 1},
-		{'name': 'Super Healing Potion', 'description': 'Heals a large amount of health.', 'effect': 10, 'location': 1}]
-		Item.insert_many(item_pop).execute()
+	# numOfRowsItems = Item.select().count()
+	# if numOfRowsItems == 0:
+	# 	item_pop = [
+	# 	{'name': 'Minor Healing Potion', 'description': 'Heals a small amount of health.', 'effect': 1, 'location': 1},
+	# 	{'name': 'Healing Potion', 'description': 'Heals a substantial amount of health.', 'effect': 5, 'location': 1},
+	# 	{'name': 'Super Healing Potion', 'description': 'Heals a large amount of health.', 'effect': 10, 'location': 1}]
+	# 	Item.insert_many(item_pop).execute()
 	#End of population queries 
 
 	print("Database tables and data have been created")
