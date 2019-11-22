@@ -16,6 +16,7 @@ class Monster(Model):
 	mons_type = CharField()
 	level = IntegerField(default=1)
 	health = IntegerField(default=1)
+	damage = IntegerField(default=1)
 	image = CharField()
 	location = ForeignKeyField(Location, backref='monsters')
 
@@ -81,9 +82,9 @@ def initialize():
 	numOfRowsMonster = Monster.select().count()
 	if numOfRowsMonster == 0:
 		monster_pop = [
-	    {'mons_type': 'Slime', 'level': 1, 'health': 1, 'image': 'x', 'location': 2},
-	    {'mons_type': 'Wolf', 'level': 5, 'health': 5, 'image': 'x', 'location': 2},
-	    {'mons_type': 'Dragon', 'level': 10, 'health': 10, 'image': 'x', 'location': 2}]
+	    {'mons_type': 'Slime', 'level': 1, 'health': 1, 'damage': 1, 'image': 'x', 'location': 2},
+	    {'mons_type': 'Wolf', 'level': 5, 'health': 5, 'damage': 5,'image': 'x', 'location': 2},
+	    {'mons_type': 'Dragon', 'level': 10, 'health': 10,'damage': 10,'image': 'x', 'location': 2}]
 		Monster.insert_many(monster_pop).execute()
 
 	# numOfRowsItems = Item.select().count()
