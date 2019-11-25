@@ -6,14 +6,16 @@ from playhouse.shortcuts import model_to_dict
 item = Blueprint('items', 'item')
 
 
-#List all items in shop
+#List all items in inventory
 @item.route('/', methods=['GET'])
 def list_items():
+	print(current_user)
 	try:
-		all_items = [model_to_dict(l) for i in models.Item.select()]
-		return jsonify(data=all_items, status={'code': 200, 'message': 'Success'})
+		inventory = [model_to_dict(i) for i in models.Item.select()]
+		return jsonify(data=inventory, status={'code': 200, 'message': 'Success'})
 	except models.DoesNotExist:
 		return jsonify(data={}, status={'code': 401, 'message': 'Error getting the resources'})
+
 
 #create item
 @item.route('/', methods=['POST'])
