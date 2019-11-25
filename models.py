@@ -46,10 +46,10 @@ class Companion(Model):
 	race = CharField()
 	char_class = CharField()
 	level = IntegerField(default=1)
-	experience = IntegerField()
+	experience = IntegerField(default=0)
 	health = IntegerField(default=10)
 	damage = IntegerField(default=1)
-	image = CharField();
+	image = CharField()
 	user = ForeignKeyField(User, backref='companions')  
 
 	class Meta:
