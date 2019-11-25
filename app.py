@@ -1,4 +1,5 @@
 import models
+import os
 from flask import Flask, request, jsonify, g
 from flask_login import LoginManager
 from flask_cors import CORS
@@ -58,8 +59,9 @@ app.register_blueprint(monster, url_prefix='/api/v1/monsters')
 
 CORS(app, origins=['http://localhost:3000'], supports_credentials=True)
 
-
-
+if 'ON_HEROKU' in os.environ:
+    print('hitting')
+    models.initialize()
 
 if __name__ == "__main__": 
     models.initialize()
