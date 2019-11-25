@@ -63,7 +63,7 @@ def current_user(user_id):
 
 
 
-#Update user gold
+#Update user gold 
 @user.route('/<user_id>/gold', methods=['PATCH'])
 def update_user(user_id):
     user_data = request.get_json()
