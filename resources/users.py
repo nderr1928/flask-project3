@@ -64,9 +64,11 @@ def current_user(user_id):
 
 
 #Update user gold 
-@user.route('/<user_id>/gold', methods=['PATCH'])
+@user.route('/<user_id>/gold', methods=['PUT'])
 def update_user(user_id):
+    print('butts')
     user_data = request.get_json()
+    print(user_data)
     updated_data = models.User.update(
         gold=user_data
     ).where(models.User.id==user_id).execute()
