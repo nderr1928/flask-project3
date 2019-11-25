@@ -42,22 +42,22 @@ def after_request(response):
 def index():
     return 'testing things'
 
-CORS(companion, origins=['http://localhost:3000', 'https://battle-log.herokuapp.com/'], supports_credentials=True)
+CORS(companion, origins=['http://localhost:3000', 'https://battle-log.herokuapp.com'], supports_credentials=True)
 app.register_blueprint(companion, url_prefix='/api/v1/companions')
 
-CORS(location, origins=['http://localhost:3000', 'https://battle-log.herokuapp.com/'], supports_credentials=True)
+CORS(location, origins=['http://localhost:3000', 'https://battle-log.herokuapp.com'], supports_credentials=True)
 app.register_blueprint(location, url_prefix='/api/v1/locations')
 
-CORS(user, origins=['http://localhost:3000', 'https://battle-log.herokuapp.com/'], supports_credentials=True)
+CORS(user, origins=['http://localhost:3000', 'https://battle-log.herokuapp.com'], supports_credentials=True)
 app.register_blueprint(user, url_prefix='/api/v1/users')
 
-CORS(item, origins=['http://localhost:3000', 'https://battle-log.herokuapp.com/'], supports_credentials=True)
+CORS(item, origins=['http://localhost:3000', 'https://battle-log.herokuapp.com'], supports_credentials=True)
 app.register_blueprint(item, url_prefix='/api/v1/items')
 
-CORS(monster, origins=['http://localhost:3000', 'https://battle-log.herokuapp.com/'], supports_credentials=True)
+CORS(monster, origins=['http://localhost:3000', 'https://battle-log.herokuapp.com'], supports_credentials=True)
 app.register_blueprint(monster, url_prefix='/api/v1/monsters')
 
-CORS(app, origins=['http://localhost:3000', 'https://battle-log.herokuapp.com/'], supports_credentials=True)
+CORS(app, origins=['http://localhost:3000', 'https://battle-log.herokuapp.com'], supports_credentials=True)
 
 if 'ON_HEROKU' in os.environ:
     print('hitting')
