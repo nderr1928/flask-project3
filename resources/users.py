@@ -68,7 +68,7 @@ def current_user(user_id):
 def update_user(user_id):
     user_data = request.get_json()
     updated_data = models.User.update(
-        gold=user_data['gold']
+        gold=user_data
     ).where(models.User.id==user_id).execute()
     updated_user_dict = model_to_dict(models.User.get(id=user_id))
     return jsonify(data=updated_user_dict, status={'code': 200, 'msg': 'success'})

@@ -82,9 +82,9 @@ def initialize():
 	numOfRowsMonster = Monster.select().count()
 	if numOfRowsMonster == 0:
 		monster_pop = [
-	    {'mons_type': 'Slime', 'level': 1, 'health': 1, 'damage': 1, 'image': 'x', 'location': 2},
-	    {'mons_type': 'Wolf', 'level': 5, 'health': 5, 'damage': 5,'image': 'x', 'location': 2},
-	    {'mons_type': 'Dragon', 'level': 10, 'health': 10,'damage': 10,'image': 'x', 'location': 2}]
+	    {'mons_type': 'Scout', 'level': 1, 'health': 25, 'damage': 5, 'image': '/images/Avatars/Icons/PNG/female_Cat1.png', 'location': 2},
+	    {'mons_type': 'Warrior', 'level': 5, 'health': 50, 'damage': 10,'image': '/images/Avatars/Icons/PNG/female_Cat3.png', 'location': 2},
+	    {'mons_type': 'Elite Guard', 'level': 10, 'health': 100,'damage': 15,'image': '/images/Avatars/Icons/PNG/male_Cat3.png', 'location': 2}]
 		Monster.insert_many(monster_pop).execute()
 
 	# numOfRowsItems = Item.select().count()
