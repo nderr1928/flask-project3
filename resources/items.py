@@ -26,7 +26,7 @@ def create_item():
 	return jsonify(data=created_item_dict, status={'code': 201, 'message': 'success'})
 
 #delete item
-@item.route('/', methods=['DELETE'])
+@item.route('/<id>/', methods=['DELETE'])
 def delete_items(id):
 	deleted_item = models.Item.get(id=id)
 	deleted_item.delete()

@@ -60,3 +60,21 @@ def current_user(user_id):
     print(user_id)
     user = model_to_dict(models.User.get(id=user_id))
     return jsonify(user)
+
+
+
+#Update user gold 
+@user.route('/<user_id>/gold', methods=['PATCH'])
+def update_user(user_id):
+    user_data = request.get_json()
+    updated_data = models.User.update(
+        gold=user_data['gold']
+    ).where(models.User.id==user_id).execute()
+    updated_user_dict = model_to_dict(models.User.get(id=user_id))
+    return jsonify(data=updated_user_dict, status={'code': 200, 'msg': 'success'})
+
+
+
+
+
+

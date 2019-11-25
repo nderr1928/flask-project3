@@ -34,11 +34,11 @@ def create_companion():
 	created_companion_dict = model_to_dict(created_companion)
 	return jsonify(data=created_companion_dict, status={'code': 201, 'message': 'success'})
 
-#Delete companion
-@companion.route('/', methods=['DELETE'])
+#Delete Companionsc
+@companion.route('/<id>/', methods=['DELETE'])
 def delete_companion(id):
-	deleted_companion = models.Companion.get(id=id)
-	deleted_companion.delete()
+	query = models.Companion.delete().where(models.Companion.id==id)
+	query.execute()
 	return jsonify(data='resource successfully deleted', status={"code": 200, "message": "resource deleted successfully"})
 
 #Edit Route
